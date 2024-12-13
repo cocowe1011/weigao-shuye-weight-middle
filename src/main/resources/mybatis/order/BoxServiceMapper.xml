@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.middle.ccs.order.dao.BoxServiceMapper">
+
+    <select id="getId" resultType="java.lang.Integer">
+        select count(*) boxnum from dbo.box_main
+        where CAST(create_time AS DATE) = CAST(GETDATE() AS DATE)
+    </select>
+    <select id="getBoxReport" resultType="com.middle.ccs.order.entity.vo.BoxDetailVO" parameterType="com.middle.ccs.order.entity.dto.ReportListDTO">
+        SELECT
+            box_detail.box_detail_id,
+            box_detail.qualified,
+            CASE
+               WHEN box_main.qualified = '1' THEN '合格'
+               ELSE '不合格'
+            END AS boxQualified,
+            Round(box_detail.sl_read, 1) as sl_read,
+            Round(box_detail.gl_read, 1) as gl_read,
+            Round(box_detail.sk_read, 1) as sk_read,
+            Round(box_detail.smpl_read, 1) as smpl_read,
+            Round(box_detail.nl_read, 1) as nl_read,
+            box_detail.number_turns as box_detail_number_turns,  -- 箱子当前数据属于第几圈
+            Round(box_detail.pfn_read, 1) as pfn_read,
+            Round(box_detail.sx_speed_read, 1) as sx_speed_read,
+            box_detail.radiation_start_time,
+            box_detail.pass_h_time,
+            box_detail.pass_g_time,
+            box_detail.pass_f_time,
+            box_detail.pass_e_time,
+            box_detail.pass_d_time,
+            box_detail.pass_c_time,
+            box_detail.pass_a_time,
+            box_detail.pass_b_time,
+            box_detail.radiation_end_time,
+            box_main.box_id,
+            box_main.box_imitate_id,
+            box_main.load_scan_code,
+            box_main.labyrinth_scan_code,
+            box_main.invalid_flag,
+            box_main.create_time,
+            box_main.number_turns as box_number_turns,  -- 箱子总圈数
+            order_main.order_id,
+            order_main.order_no,
+            order_main.order_name,
+            order_main.revert_flag,
+            order_main.batch_id,
+            order_main.product_name,
+            order_main.accelerator_k_value,
+            order_main.load_method,
+            order_main.art_name,
+            order_main.path_name,
+            order_main.number_turns as dd_number_turns,  -- 订单圈数
+            order_main.box_length,
+            order_main.box_width,
+            order_main.box_height,
+            order_main.box_weight,
+            order_main.sl_upper_limit,
+            order_main.sl_set,
+            order_main.sl_lower_limit,
+            order_main.gl_upper_limit,
+            order_main.gl_set,
+            order_main.gl_lower_limit,
+            order_main.sk_upper_limit,
+            order_main.sk_set,
+            order_main.sk_lower_limit,
+            order_main.smpl_upper_limit,
+            order_main.smpl_set,
+            order_main.smpl_lower_limit,
+            order_main.pfn_upper_limit,
+            order_main.pfn_set,
+            order_main.pfn_lower_limit,
+            order_main.nl_upper_limit,
+            order_main.nl_set,
+            order_main.nl_lower_limit,
+            order_main.order_box_num,
+            order_main.eliminate_box_num,
+            order_main.exhibit_box_num,
+            order_main.qualified_box_num,
+            order_main.creator_name,
+            order_main.creator_id,
+            order_main.invalid_flag,
+            order_main.order_status,
+            order_main.sx_speed_set,
+            order_main.sx_speed_lower_limit,
+            order_main.sx_speed_upper_limit
+        FROM
+            dbo.box_detail
+        inner join
+            dbo.box_main
+            on dbo.box_detail.box_imitate_id = dbo.box_main.box_imitate_id
+        inner join
+            dbo.order_main
+            on dbo.box_main.order_id = dbo.order_main.order_id
+        where dbo.box_detail.box_imitate_id = #{boxImitateId}
+    </select>
+    <select id="getAccData" resultType="com.middle.ccs.order.entity.po.ParametersAcc">
+        SELECT
+            energy,
+            beam,
+            speed,
+            power,
+            scan_f,
+            scan_w,
+            pfn,
+            pps,
+            beam_on
+        FROM
+            parameters
+        ORDER BY
+            time DESC limit 1
+    </select>
+    <select id="getBoxInfoByBoxImitateId" parameterType="com.middle.ccs.order.entity.dto.BoxMainDTO" resultType="com.middle.ccs.order.entity.po.BoxMain">
+        SELECT box_id, box_imitate_id FROM dbo.box_main where dbo.box_main.box_imitate_id = #{boxImitateId}
+    </select>
+    <delete id="deleteBoxInfoByBoxId" parameterType="java.lang.Long">
+  	    DELETE dbo.box_main where dbo.box_main.box_id = #{boxId}
+    </delete>
+    <delete id="deleteBoxDetailByBoxImitateId" parameterType="java.lang.String">
+  	    DELETE dbo.box_detail where box_imitate_id = #{boxImitateId}
+    </delete>
+    <select id="getBoxReportLatest" resultType="com.middle.ccs.order.entity.vo.BoxDetailVO" parameterType="com.middle.ccs.order.entity.dto.ReportLatestDTO">
+        SELECT
+            TOP 1
+            box_detail.box_detail_id,
+            box_detail.qualified,
+            CASE
+               WHEN box_main.qualified = '1' THEN '合格'
+               ELSE '不合格'
+            END AS boxQualified,
+            box_detail.sl_read,
+            box_detail.gl_read,
+            box_detail.sk_read,
+            box_detail.smpl_read,
+            box_detail.nl_read,
+            box_detail.number_turns as box_detail_number_turns,  -- 箱子当前数据属于第几圈
+            box_detail.pfn_read,
+            box_detail.sx_speed_read,
+            box_detail.radiation_start_time,
+            box_detail.pass_h_time,
+            box_detail.pass_g_time,
+            box_detail.pass_f_time,
+            box_detail.pass_e_time,
+            box_detail.pass_d_time,
+            box_detail.pass_c_time,
+            box_detail.pass_a_time,
+            box_detail.pass_b_time,
+            box_detail.radiation_end_time,
+            box_main.box_id,
+            box_main.box_imitate_id,
+            box_main.load_scan_code,
+            box_main.labyrinth_scan_code,
+            box_main.invalid_flag,
+            box_main.create_time,
+            box_main.number_turns as box_number_turns,  -- 箱子总圈数
+            order_main.order_id,
+            order_main.order_no,
+            order_main.order_name,
+            order_main.revert_flag,
+            order_main.batch_id,
+            order_main.product_name,
+            order_main.accelerator_k_value,
+            order_main.load_method,
+            order_main.art_name,
+            order_main.path_name,
+            order_main.number_turns as dd_number_turns,  -- 订单圈数
+            order_main.box_length,
+            order_main.box_width,
+            order_main.box_height,
+            order_main.box_weight,
+            order_main.sl_upper_limit,
+            order_main.sl_set,
+            order_main.sl_lower_limit,
+            order_main.gl_upper_limit,
+            order_main.gl_set,
+            order_main.gl_lower_limit,
+            order_main.sk_upper_limit,
+            order_main.sk_set,
+            order_main.sk_lower_limit,
+            order_main.smpl_upper_limit,
+            order_main.smpl_set,
+            order_main.smpl_lower_limit,
+            order_main.pfn_upper_limit,
+            order_main.pfn_set,
+            order_main.pfn_lower_limit,
+            order_main.nl_upper_limit,
+            order_main.nl_set,
+            order_main.nl_lower_limit,
+            order_main.order_box_num,
+            order_main.eliminate_box_num,
+            order_main.exhibit_box_num,
+            order_main.qualified_box_num,
+            order_main.creator_name,
+            order_main.creator_id,
+            order_main.invalid_flag,
+            order_main.order_status,
+            order_main.sx_speed_set,
+            order_main.sx_speed_lower_limit,
+            order_main.sx_speed_upper_limit
+        FROM
+            dbo.box_detail
+        inner join
+            dbo.box_main
+            on dbo.box_detail.box_imitate_id = dbo.box_main.box_imitate_id
+        inner join
+            dbo.order_main
+            on dbo.box_main.order_id = dbo.order_main.order_id
+        where dbo.order_main.order_id = #{orderId}
+		order by box_main.create_time desc, box_main.box_imitate_id desc
+    </select>
+    <select id="getBoxInfoByOrderId" resultType="com.middle.ccs.order.entity.po.BoxMain" parameterType="com.middle.ccs.order.entity.dto.ReportListDTO">
+        SELECT box_imitate_id, qualified FROM dbo.order_main
+		left join
+		dbo.box_main
+		on dbo.box_main.order_id = dbo.order_main.order_id
+        where order_main.order_id = #{orderId}
+        order by dbo.box_main.box_imitate_id
+    </select>
+    <select id="getBoxInfoByOrderIdDesc" resultType="com.middle.ccs.order.entity.po.BoxMain" parameterType="com.middle.ccs.order.entity.dto.ReportListDTO">
+        SELECT box_imitate_id, qualified, load_scan_code, box_id, box_main.order_id, box_main.number_turns, box_main.order_no, fail_reason FROM dbo.order_main
+		left join
+		dbo.box_main
+		on dbo.box_main.order_id = dbo.order_main.order_id
+        where order_main.order_id = #{orderId}
+        order by dbo.box_main.box_imitate_id desc
+    </select>
+    <select id="getBoxOriginalReportByOrderId" resultType="com.middle.ccs.order.entity.po.BoxMainOriginal" parameterType="com.middle.ccs.order.entity.dto.ReportListDTO">
+        SELECT box_imitate_id, qualified, load_scan_code, box_id, box_main_original.order_id, box_main_original.number_turns, box_main_original.order_no, fail_reason FROM dbo.order_main_original
+		left join
+		dbo.box_main_original
+		on dbo.box_main_original.order_id = dbo.order_main_original.order_id
+        where order_main_original.order_id = #{orderId}
+        order by dbo.box_main_original.box_imitate_id desc
+    </select>
+    <update id="updateBoxImitateIdBox">
+        update dbo.box_main set box_imitate_id = #{boxImitateId} where box_imitate_id = #{aboxImitateId}
+    </update>
+    <update id="updateBoxImitateIdBoxDetail">
+        update dbo.box_detail set box_imitate_id = #{boxImitateId} where box_imitate_id = #{aboxImitateId}
+    </update>
+    <select id="getAccDataByLocal" resultType="com.middle.ccs.order.entity.po.OrderParameters">
+        SELECT
+            top 1
+            energy,
+            beam,
+            speed,
+            power,
+            scan_f,
+            scan_w,
+            pfn,
+            pps,
+            beam_on
+        FROM
+            order_parameters
+    </select>
+</mapper>
