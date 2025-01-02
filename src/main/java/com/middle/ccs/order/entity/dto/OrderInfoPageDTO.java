@@ -10,21 +10,7 @@ import javax.validation.constraints.NotNull;
  * @date 2023-06-2023/6/24-0:40
  */
 @Data
-public class ReportListPageDTO {
-    /**
-     * 订单编号
-     */
-    private Long orderNo;
-
-    /**
-     * 批次编号
-     */
-    private String batchId;
-
-    /**
-     * 箱编号
-     */
-    private String boxImitateId;
+public class OrderInfoPageDTO {
 
     /**
      * 起始页数
