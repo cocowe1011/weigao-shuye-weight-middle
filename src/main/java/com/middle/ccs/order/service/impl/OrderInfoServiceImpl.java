@@ -59,5 +59,29 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         return voPage;
     }
 
+    @Override
+    public OrderInfo getNowRunningOrder() {
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setInvalidFlag("0");
+        QueryWrapper<OrderInfo> wrapper= new QueryWrapper<>(orderInfo);
+        wrapper.eq("order_status", 1);
+        List<OrderInfo> orderInfos = orderInfoMapper.selectList(wrapper);
+        if (orderInfos != null && orderInfos.size() > 0) {
+            return orderInfos.get(0);
+        }
+        return null;
+    }
 
+    @Override
+    public OrderInfo getOrderInfoByBatchId(Long batchId) {
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setInvalidFlag("0");
+        QueryWrapper<OrderInfo> wrapper= new QueryWrapper<>(orderInfo);
+        wrapper.eq("batch_id", batchId);
+        List<OrderInfo> orderInfos = orderInfoMapper.selectList(wrapper);
+        if (orderInfos != null && orderInfos.size() > 0) {
+            return orderInfos.get(0);
+        }
+        return null;
+    }
 }

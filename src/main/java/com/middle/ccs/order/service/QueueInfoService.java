@@ -29,4 +29,6 @@ public interface QueueInfoService {
      * @return 出参
      */
     List<QueueInfo> queryQueueList();
+
+    QueueInfo getQueueInfoById(Long id);
 }

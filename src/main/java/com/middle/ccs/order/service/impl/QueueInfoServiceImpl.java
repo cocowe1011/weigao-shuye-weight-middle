@@ -43,4 +43,9 @@ public class QueueInfoServiceImpl implements QueueInfoService {
         return queueInfoMapper.selectList(wrapper);
     }
 
+    @Override
+    public QueueInfo getQueueInfoById(Long id) {
+        return queueInfoMapper.selectById(id);
+    }
+
 }

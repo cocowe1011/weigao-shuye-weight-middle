@@ -17,7 +17,7 @@ import java.util.Date;
 @TableName("queue_info")
 public class QueueInfo {
     @TableId
-    private Integer id;
+    private Long id;
 
     /**
     * 队列名字

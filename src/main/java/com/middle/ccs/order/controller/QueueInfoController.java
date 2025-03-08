@@ -50,4 +50,10 @@ public class  QueueInfoController {
         return ResponseResult.success(this.queueInfoService.queryQueueList());
     }
 
+    @ApiOperation("根据ID查询订单信息")
+    @GetMapping("/getQueueInfoById")
+    public ResponseResult<QueueInfo> getQueueInfoById(@ApiParam(value = "队列ID", required = true) @RequestParam Long id) {
+        return ResponseResult.success(this.queueInfoService.getQueueInfoById(id));
+    }
+
 }

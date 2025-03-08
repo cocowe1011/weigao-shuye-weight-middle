@@ -43,4 +43,8 @@ public interface OrderInfoService {
     List<OrderInfo> queryOrderList();
 
     PageInfo<OrderInfo> queryHistoryOrderList(OrderInfoPageDTO dto);
+
+    OrderInfo getNowRunningOrder();
+
+    OrderInfo getOrderInfoByBatchId(Long batchId);
 }
