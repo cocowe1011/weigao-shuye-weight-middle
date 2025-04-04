@@ -10,7 +10,7 @@ import java.util.List;
  * @classDesc: 数据访问接口:(UserInfo)
  * @author: makejava
  * @date: 2023-06-27 20:58:15
- * @copyright 众阳健康
+ * @copyright 作者
  */
 @Mapper
 public interface UserInfoMapper extends BaseMapper<UserInfo> {

@@ -10,7 +10,7 @@ import lombok.Data;
  * @classDesc: 实体类:(CssConfig)
  * @author: makejava
  * @date: 2023-07-04 15:31:49
- * @copyright 众阳健康
+ * @copyright 作者
  */
 @Data
 @TableName("css_config")

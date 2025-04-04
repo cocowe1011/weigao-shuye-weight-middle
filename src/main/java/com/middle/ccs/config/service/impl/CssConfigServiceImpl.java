@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * @classDesc: 业务逻辑:(CssConfig)
  * @author: makejava
  * @date: 2023-07-04 15:31:43
- * @copyright 众阳健康
+ * @copyright 作者
  */
 @Service
 public class CssConfigServiceImpl implements CssConfigService {

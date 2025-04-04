@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @classDesc: 控制器:(CssConfig)
  * @author: makejava
  * @date: 2023-07-04 15:31:37
- * @copyright 众阳健康
+ * @copyright 作者
  */
 @RestController
 @RequestMapping("/cssConfig")

@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * @classDesc: 控制器:(UserInfo)
  * @author: makejava
  * @date: 2023-06-27 20:58:06
- * @copyright 众阳健康
+ * @copyright 作者
  */
 @RestController
 @RequestMapping("/userInfo")

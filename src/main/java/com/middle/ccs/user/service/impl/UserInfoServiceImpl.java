@@ -17,7 +17,7 @@ import java.util.List;
  * @classDesc: 业务逻辑:(UserInfo)
  * @author: makejava
  * @date: 2023-06-27 20:58:08
- * @copyright 众阳健康
+ * @copyright 作者
  */
 @Service
 public class UserInfoServiceImpl implements UserInfoService {

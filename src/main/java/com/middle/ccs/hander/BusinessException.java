@@ -7,9 +7,9 @@ import java.util.regex.Matcher;
 
 /**
  * @classDesc: 功能描述:(业务异常-需要捕获并处理为error，需要业务方关心的异常)
- * @author: 辛金龙
+ * @author: 作者
  * @date: 2020/4/7 11:19
- * @copyright 众阳健康
+ * @copyright 作者
  */
 @Slf4j
 @Data

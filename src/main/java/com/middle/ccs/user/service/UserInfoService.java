@@ -9,7 +9,7 @@ import java.util.List;
  * @classDesc: 业务接口:(UserInfo)
  * @author: makejava
  * @date: 2023-06-27 20:58:12
- * @copyright 众阳健康
+ * @copyright 作者
  */
 public interface UserInfoService {
    
