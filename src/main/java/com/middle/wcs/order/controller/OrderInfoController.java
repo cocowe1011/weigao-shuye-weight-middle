@@ -74,4 +74,10 @@ public class OrderInfoController {
     public ResponseResult<PageInfo<OrderInfo>> queryHistoryOrderList(@RequestBody OrderInfoPageDTO dto) {
         return ResponseResult.success(this.orderInfoService.queryHistoryOrderList(dto));
     }
+
+    @ApiOperation("综合查询")
+    @PostMapping("/selectList")
+    public ResponseResult<List<OrderInfo>> selectList(@ApiParam(value = "订单信息", required = true) @RequestBody OrderInfo po) {
+        return ResponseResult.success(this.orderInfoService.selectList(po));
+    }
 }

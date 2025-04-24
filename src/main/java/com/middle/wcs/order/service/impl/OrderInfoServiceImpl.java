@@ -43,7 +43,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Override
     public List<OrderInfo> queryOrderList() {
         OrderInfo orderInfo = new OrderInfo();
-        orderInfo.setInvalidFlag("0");
+        orderInfo.setInvalidFlag(0);
         QueryWrapper<OrderInfo> wrapper= new QueryWrapper<>(orderInfo);
         wrapper.ne("order_status", 3);
         wrapper.orderByDesc("order_status").orderByAsc("insert_time");
@@ -62,7 +62,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Override
     public OrderInfo getNowRunningOrder() {
         OrderInfo orderInfo = new OrderInfo();
-        orderInfo.setInvalidFlag("0");
+        orderInfo.setInvalidFlag(0);
         QueryWrapper<OrderInfo> wrapper= new QueryWrapper<>(orderInfo);
         wrapper.eq("order_status", 1);
         List<OrderInfo> orderInfos = orderInfoMapper.selectList(wrapper);
@@ -75,7 +75,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Override
     public OrderInfo getOrderInfoByBatchId(Long batchId) {
         OrderInfo orderInfo = new OrderInfo();
-        orderInfo.setInvalidFlag("0");
+        orderInfo.setInvalidFlag(0);
         QueryWrapper<OrderInfo> wrapper= new QueryWrapper<>(orderInfo);
         wrapper.eq("batch_id", batchId);
         List<OrderInfo> orderInfos = orderInfoMapper.selectList(wrapper);
@@ -83,5 +83,14 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             return orderInfos.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<OrderInfo> selectList(OrderInfo po) {
+        // 根据入参构建查询条件
+        QueryWrapper<OrderInfo> queryWrapper = new QueryWrapper<>(po);
+        // 根据his_create_time排序
+        queryWrapper.orderByDesc("insert_time");
+        return this.orderInfoMapper.selectList(queryWrapper);
     }
 }

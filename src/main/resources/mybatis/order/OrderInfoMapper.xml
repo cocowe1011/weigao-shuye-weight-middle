@@ -21,17 +21,14 @@
         SELECT
             id,
             order_id,
-            batch_id,
             product_code,
             product_name,
-            is_print1,
-            is_print2,
-            is_print3,
-            qr_code,
+            tray_code,
             in_put,
+            is_terile,
+            invalid_flag,
             insert_time,
-            order_status,
-            invalid_flag
+            order_status
         FROM
             dbo.order_info
         WHERE

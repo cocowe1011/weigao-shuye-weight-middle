@@ -47,4 +47,6 @@ public interface OrderInfoService {
     OrderInfo getNowRunningOrder();
 
     OrderInfo getOrderInfoByBatchId(Long batchId);
+
+    List<OrderInfo> selectList(OrderInfo po);
 }

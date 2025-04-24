@@ -22,8 +22,7 @@ public class OrderInfo {
     * 主键
     */
     @TableId
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     /**
     * 插入时间
@@ -37,12 +36,6 @@ public class OrderInfo {
     private String orderId;
 
     /**
-    * 生产单批次订单ID
-    */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long batchId;
-
-    /**
     * 产品编号
     */
     private String productCode;
@@ -53,37 +46,32 @@ public class OrderInfo {
     private String productName;
 
     /**
-    * 指定预热房（A1-G1）
+    * 托盘码
     */
-    private String isPrint1;
+    private String trayCode;
 
     /**
-    * 指定灭菌柜
+    * 进货口指定：1、一楼外部进货。2、二楼进货。3、三楼进货。4、四楼进货
     */
-    private String isPrint2;
+    private Integer inPut;
 
     /**
-    * 指定输出，0：不解析 1、解析库 2、立体库
-    */
-    private String isPrint3;
+     * 订单状态，0待执行1执行中2已暂停3已完成
+     */
+    private Integer orderStatus;
 
     /**
-    * 单批次16个托盘码符号间隔
+    * 托盘是否灭菌：0不灭菌，1灭菌
     */
-    private String qrCode;
-
-    /**
-    * 进货口指定，1、一楼外部进货。2、2楼进货。3、三楼进货。4、不解析出口
-    */
-    private String inPut;
-
-    /**
-    * 订单状态，0待执行1执行中2已暂停3已完成
-    */
-    private String orderStatus;
+    private Integer isTerile;
 
     /**
      * 作废标识，0未作废，1作废
      */
-    private String invalidFlag;
+    private Integer invalidFlag;
+
+    /**
+     * 一个产品编号一条明细
+     */
+    private String detailList;
 }
