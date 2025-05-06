@@ -27,7 +27,7 @@ public interface QueueInfoService {
      * 查询队列信息列表
      * @return 出参
      */
-    List<QueueInfo> queryQueueList();
+    List<QueueInfo> queryQueueList(QueueInfo dto);
 
     QueueInfo getQueueInfoById(Long id);
 }

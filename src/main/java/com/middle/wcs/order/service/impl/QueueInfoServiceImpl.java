@@ -37,9 +37,8 @@ public class QueueInfoServiceImpl implements QueueInfoService {
     }
 
     @Override
-    public List<QueueInfo> queryQueueList() {
-        QueueInfo queueInfo = new QueueInfo();
-        QueryWrapper<QueueInfo> wrapper= new QueryWrapper<>(queueInfo);
+    public List<QueueInfo> queryQueueList(QueueInfo dto) {
+        QueryWrapper<QueueInfo> wrapper= new QueryWrapper<>(dto);
         return queueInfoMapper.selectList(wrapper);
     }
 

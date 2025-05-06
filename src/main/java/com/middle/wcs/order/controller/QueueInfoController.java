@@ -44,11 +44,11 @@ public class  QueueInfoController {
      */
     @ApiOperation("查询队列信息列表")
     @PostMapping("/queryQueueList")
-    public ResponseResult<List<QueueInfo>> queryQueueList() {
-        return ResponseResult.success(this.queueInfoService.queryQueueList());
+    public ResponseResult<List<QueueInfo>> queryQueueList(@ApiParam(value = "入参", required = true) @RequestBody QueueInfo dto) {
+        return ResponseResult.success(this.queueInfoService.queryQueueList(dto));
     }
 
-    @ApiOperation("根据ID查询订单信息")
+    @ApiOperation("根据ID查询队列信息")
     @GetMapping("/getQueueInfoById")
     public ResponseResult<QueueInfo> getQueueInfoById(@ApiParam(value = "队列ID", required = true) @RequestParam Long id) {
         return ResponseResult.success(this.queueInfoService.getQueueInfoById(id));

@@ -29,7 +29,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("CCS消毒中台API文档")
+                .title("WCS接口文档")
                 .description("API接口文档")
                 .contact(new Contact("开发团队", "", ""))
                 .version("1.0")
