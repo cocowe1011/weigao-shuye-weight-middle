@@ -7,7 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import javax.validation.constraints.NotNull;
 
 /**
  * (OrderInfo)实体类
@@ -74,4 +76,18 @@ public class OrderInfo {
      * 一个产品编号一条明细
      */
     private String detailList;
+    
+    /**
+     * 起始页数
+     */
+    @TableField(exist = false)
+    @NotNull(message = "起始页数不能为空")
+    private Integer pageNum;
+
+    /**
+     * 每页大小
+     */
+    @TableField(exist = false)
+    @NotNull(message = "每页大小不能为空")
+    private Integer pageSize;
 }

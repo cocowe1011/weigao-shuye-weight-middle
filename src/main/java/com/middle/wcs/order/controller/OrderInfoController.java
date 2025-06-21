@@ -2,7 +2,6 @@ package com.middle.wcs.order.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.middle.wcs.hander.ResponseResult;
-import com.middle.wcs.order.entity.dto.OrderInfoPageDTO;
 import com.middle.wcs.order.entity.po.OrderInfo;
 import com.middle.wcs.order.service.OrderInfoService;
 import io.swagger.annotations.Api;
@@ -66,13 +65,14 @@ public class OrderInfoController {
 
 
     /**
-     * 查询历史订单信息列表
-     * @return 出参
+     * 综合查询-分页
+     * @param orderInfo 订单信息（包含分页参数和查询条件）
+     * @return 分页查询结果
      */
-    @ApiOperation("查询历史订单信息列表")
-    @PostMapping("/queryHistoryOrderList")
-    public ResponseResult<PageInfo<OrderInfo>> queryHistoryOrderList(@RequestBody OrderInfoPageDTO dto) {
-        return ResponseResult.success(this.orderInfoService.queryHistoryOrderList(dto));
+    @ApiOperation("综合查询-分页")
+    @PostMapping("/selectListByPage")
+    public ResponseResult<PageInfo<OrderInfo>> selectListByPage(@ApiParam(value = "订单信息（包含分页参数和查询条件）", required = true) @RequestBody OrderInfo orderInfo) {
+        return ResponseResult.success(this.orderInfoService.selectListByPage(orderInfo));
     }
 
     @ApiOperation("综合查询")

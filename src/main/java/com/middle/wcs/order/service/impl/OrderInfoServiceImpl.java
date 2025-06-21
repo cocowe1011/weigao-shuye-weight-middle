@@ -3,7 +3,6 @@ package com.middle.wcs.order.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import com.middle.wcs.order.entity.dto.OrderInfoPageDTO;
 import com.middle.wcs.order.entity.po.OrderInfo;
 import com.middle.wcs.order.dao.OrderInfoMapper;
 import com.middle.wcs.order.service.OrderInfoService;
@@ -51,10 +50,43 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     }
 
     @Override
-    public PageInfo<OrderInfo> queryHistoryOrderList(OrderInfoPageDTO dto) {
-        // 分页查询当前时段的预约患者
-        Page<OrderInfo> page = startPage(dto.getPageNum(), dto.getPageSize());
-        orderInfoMapper.queryHistoryOrderList(dto);
+    public PageInfo<OrderInfo> selectListByPage(OrderInfo orderInfo) {
+        // 分页查询
+        Page<OrderInfo> page = startPage(orderInfo.getPageNum(), orderInfo.getPageSize());
+        
+        // 构建查询条件
+        QueryWrapper<OrderInfo> queryWrapper = new QueryWrapper<>();
+        
+        // 如果有具体查询条件，添加到查询条件中
+        if (orderInfo.getOrderId() != null && !orderInfo.getOrderId().isEmpty()) {
+            queryWrapper.like("order_id", orderInfo.getOrderId());
+        }
+        if (orderInfo.getProductCode() != null && !orderInfo.getProductCode().isEmpty()) {
+            queryWrapper.like("product_code", orderInfo.getProductCode());
+        }
+        if (orderInfo.getProductName() != null && !orderInfo.getProductName().isEmpty()) {
+            queryWrapper.like("product_name", orderInfo.getProductName());
+        }
+        if (orderInfo.getTrayCode() != null && !orderInfo.getTrayCode().isEmpty()) {
+            queryWrapper.like("tray_code", orderInfo.getTrayCode());
+        }
+        if (orderInfo.getInPut() != null) {
+            queryWrapper.eq("in_put", orderInfo.getInPut());
+        }
+        if (orderInfo.getOrderStatus() != null) {
+            queryWrapper.eq("order_status", orderInfo.getOrderStatus());
+        }
+        if (orderInfo.getIsTerile() != null) {
+            queryWrapper.eq("is_terile", orderInfo.getIsTerile());
+        }
+        if (orderInfo.getInvalidFlag() != null) {
+            queryWrapper.eq("invalid_flag", orderInfo.getInvalidFlag());
+        }
+        
+        // 按插入时间倒序排列
+        queryWrapper.orderByDesc("insert_time");
+        
+        List<OrderInfo> list = orderInfoMapper.selectList(queryWrapper);
         PageInfo<OrderInfo> voPage = new PageInfo<>(page);
         return voPage;
     }

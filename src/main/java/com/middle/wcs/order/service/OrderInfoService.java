@@ -1,6 +1,5 @@
 package com.middle.wcs.order.service;
 
-import com.middle.wcs.order.entity.dto.OrderInfoPageDTO;
 import com.middle.wcs.order.entity.po.OrderInfo;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
@@ -42,7 +41,7 @@ public interface OrderInfoService {
      */
     List<OrderInfo> queryOrderList();
 
-    PageInfo<OrderInfo> queryHistoryOrderList(OrderInfoPageDTO dto);
+    PageInfo<OrderInfo> selectListByPage(OrderInfo orderInfo);
 
     OrderInfo getNowRunningOrder();
 
