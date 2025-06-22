@@ -33,6 +33,13 @@ public class OrderInfo {
     private Date insertTime;
 
     /**
+     * 完成时间 finish_time
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date finishTime;
+
+
+    /**
     * 生产总订单号
     */
     private String orderId;

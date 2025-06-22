@@ -59,16 +59,16 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         
         // 如果有具体查询条件，添加到查询条件中
         if (orderInfo.getOrderId() != null && !orderInfo.getOrderId().isEmpty()) {
-            queryWrapper.like("order_id", orderInfo.getOrderId());
+            queryWrapper.eq("order_id", orderInfo.getOrderId());
         }
         if (orderInfo.getProductCode() != null && !orderInfo.getProductCode().isEmpty()) {
-            queryWrapper.like("product_code", orderInfo.getProductCode());
+            queryWrapper.eq("product_code", orderInfo.getProductCode());
         }
         if (orderInfo.getProductName() != null && !orderInfo.getProductName().isEmpty()) {
-            queryWrapper.like("product_name", orderInfo.getProductName());
+            queryWrapper.eq("product_name", orderInfo.getProductName());
         }
         if (orderInfo.getTrayCode() != null && !orderInfo.getTrayCode().isEmpty()) {
-            queryWrapper.like("tray_code", orderInfo.getTrayCode());
+            queryWrapper.eq("tray_code", orderInfo.getTrayCode());
         }
         if (orderInfo.getInPut() != null) {
             queryWrapper.eq("in_put", orderInfo.getInPut());
