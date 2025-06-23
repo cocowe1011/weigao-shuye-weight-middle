@@ -20,14 +20,14 @@ import java.util.List;
 
 @Api(tags = "订单管理接口")
 @RestController
-@RequestMapping("/order_info")
+@RequestMapping("/order")
 public class OrderInfoController {
 
     @Resource
     private OrderInfoService orderInfoService;
     
     @ApiOperation("保存订单信息")
-    @PostMapping("/save")
+    @PostMapping("/insert")
     public ResponseResult<Integer> save(@ApiParam(value = "订单信息", required = true) @RequestBody OrderInfo po) {
         return ResponseResult.success(this.orderInfoService.save(po));
     }
