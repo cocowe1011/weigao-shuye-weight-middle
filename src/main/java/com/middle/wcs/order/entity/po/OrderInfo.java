@@ -60,12 +60,17 @@ public class OrderInfo {
     private String trayCode;
 
     /**
+     * 收货单号
+     */
+    private String receiptOrderCode;
+
+    /**
     * 进货口指定：1、一楼外部进货。2、二楼进货。3、三楼进货。4、四楼进货
     */
     private Integer inPut;
 
     /**
-     * 订单状态，0待执行1执行中2已暂停3已完成
+     * 订单状态，0待执行1已完成
      */
     private Integer orderStatus;
 
