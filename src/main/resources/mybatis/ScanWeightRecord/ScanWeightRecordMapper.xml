@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.middle.wcs.record.dao.ScanWeightRecordMapper">
+
+    <resultMap type="com.middle.wcs.record.entity.po.ScanWeightRecord" id="ScanWeightRecordMap">
+        <result property="recordId" column="record_id" jdbcType="INTEGER"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="productCode" column="product_code" jdbcType="VARCHAR"/>
+        <result property="productWeight" column="product_weight" jdbcType="VARCHAR"/>
+        <result property="actualWeight" column="actual_weight" jdbcType="VARCHAR"/>
+        <result property="isQualified" column="is_qualified" jdbcType="VARCHAR"/>
+        <result property="errorUpper" column="error_upper" jdbcType="VARCHAR"/>
+        <result property="errorLower" column="error_lower" jdbcType="VARCHAR"/>
+        <result property="location" column="location" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="invalidFlag" column="invalid_flag" jdbcType="VARCHAR"/>
+        <result property="udi" column="udi" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    
+
+</mapper>
